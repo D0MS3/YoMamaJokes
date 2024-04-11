@@ -3,7 +3,7 @@ import tkinter as TK
 
 YO_MAMA_JOKES_PATH = 'yo_mama_jokes.json'
 
-def button_pressed():
+def jokeBtn_pressed():
  
     # Get all selected joke types
     selected_joke_types=[]
@@ -12,32 +12,35 @@ def button_pressed():
             selected_joke_types.append(joke_type)
 
     # Show a random joke
-        myLabel.config(text = JF.getRandomJoke(dict_jokes, selected_joke_types))
+        jokeLbl.config(text = JF.getRandomJoke(dict_jokes, selected_joke_types))
 
-# setup UI
-root = TK.Tk(screenName="Yo Mama Jokes", baseName="Yo Mama")
-root.geometry("600x500")
-root.title('"Yo Mama" Jokes Generator')
-myButton = TK.Button(root, text="Gimme a joke!",command=button_pressed)
-myButton.pack()
-myLabel =TK.Label(root, text="")
-myLabel.pack()
-myLabel2 =TK.Label(root, text="ugly")
-myLabel2.pack()
+if __name__ == "__main__":
 
-#open joke json file to dictionary
-dict_jokes = JF.openDict(YO_MAMA_JOKES_PATH)
+    # Setup UI
+    # Entry Widget
+    root = TK.Tk(screenName="Yo Mama Jokes", baseName="Yo Mama")
+    root.geometry("600x500")
+    root.title('"Yo Mama" Jokes Generator')
+    # Button to generate joke
+    jokeBtn = TK.Button(root, text="Gimme a joke!",command=jokeBtn_pressed)
+    jokeBtn.pack()
+    # Label to print the joke
+    jokeLbl =TK.Label(root, text="")
+    jokeLbl.pack()
 
-#create checkbutton for every joke type
-joke_types = list(dict_jokes.keys())
-Checkbuttons=[]
-CheckbuttonsValues=[]
-for i in joke_types:
-    var=TK.IntVar()
-    newCheckbutton=TK.Checkbutton(root, text=i, variable=var)
-    CheckbuttonsValues.append(var)
-    Checkbuttons.append(newCheckbutton)
-    newCheckbutton.pack()
+    #open joke json file to dictionary
+    dict_jokes = JF.openDict(YO_MAMA_JOKES_PATH)
 
-# main loop for UI
-root.mainloop()
+    #create checkbutton for every joke type
+    joke_types = list(dict_jokes.keys())
+    Checkbuttons=[]
+    CheckbuttonsValues=[]
+    for i in joke_types:
+        var=TK.IntVar()
+        newCheckbutton=TK.Checkbutton(root, text=i, variable=var)
+        CheckbuttonsValues.append(var)
+        Checkbuttons.append(newCheckbutton)
+        newCheckbutton.pack()
+
+    # main loop for UI
+    root.mainloop()
