@@ -7,12 +7,10 @@ def __init__(self): pass
 def openDict(path: str) -> dict:
     try:
         with open(path) as json_file:
-            return json.load(json_file)
+            return json.load(json_file) 
     except:
         print("No source file for jokes found!")
-        exit()
     
-
 def getRandomJoke(dict_jokes: dict, types: list[str]) -> str:
     # extract all relevant jokes
     jokes_selection = []
